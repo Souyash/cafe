@@ -7,37 +7,25 @@ import { useCafe } from "@/lib/cafe-context";
 import { CafeTable, MenuItem } from "@/lib/data-store";
 import {
   Coffee,
-  UtensilsCrossed,
-  LayoutDashboard,
   QrCode,
   Sparkles,
   ArrowRight,
   ShieldCheck,
-  Zap,
-  TrendingUp,
-  Receipt,
-  Users,
   Clock,
   MapPin,
   Phone,
   Star,
-  CheckCircle2,
   ExternalLink,
   ChevronRight,
-  Plus,
-  Flame,
-  Leaf,
-  Wifi,
-  Heart,
-  X,
-  Volume2,
-  Award,
+  Lock,
   Compass,
-  Check,
+  Calendar,
+  Wifi,
+  X,
 } from "lucide-react";
 
 export default function HomePage() {
-  const { tables, menu, orders, customers } = useCafe();
+  const { tables, menu, orders } = useCafe();
 
   // Selected table for the interactive QR acrylic stand modal
   const [activeQrModalTable, setActiveQrModalTable] = useState<(CafeTable & { token: string }) | null>(null);
@@ -117,7 +105,7 @@ export default function HomePage() {
               <p className="text-base sm:text-lg text-stone-300 max-w-xl font-light leading-relaxed">
                 Take your seat at any of our <span className="text-gold-300 font-semibold">7 boutique cafe tables</span>.
                 Scan the table acrylic stand to browse our seasonal visual menu, customize your oat flat white,
-                and send tickets directly to the kitchen display with zero app downloads.
+                and enjoy seamless contactless dining with zero app downloads.
               </p>
 
               {/* Primary Call to Action Buttons */}
@@ -137,14 +125,6 @@ export default function HomePage() {
                   <Coffee className="w-4 h-4 text-gold-400" />
                   <span>View Autumn Menu</span>
                 </a>
-
-                <Link
-                  href="/staff/kds"
-                  className="px-4 py-3.5 rounded-xl font-medium text-xs text-stone-400 hover:text-white bg-espresso-900/60 hover:bg-espresso-800 border border-stone-800 transition flex items-center gap-1.5"
-                >
-                  <UtensilsCrossed className="w-3.5 h-3.5 text-orange-400" />
-                  <span>Live KDS Feed</span>
-                </Link>
               </div>
 
               {/* Live Floor Stat Metrics */}
@@ -158,8 +138,8 @@ export default function HomePage() {
                   <div className="text-[11px] uppercase tracking-wider text-stone-400 font-medium mt-0.5">Seating Open</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-display font-bold text-amber-400">{activeKitchenOrders.length}</div>
-                  <div className="text-[11px] uppercase tracking-wider text-stone-400 font-medium mt-0.5">Tickets in Prep</div>
+                  <div className="text-3xl font-display font-bold text-amber-400">07:30 - 22:30</div>
+                  <div className="text-[11px] uppercase tracking-wider text-stone-400 font-medium mt-0.5">Daily Hours</div>
                 </div>
               </div>
             </div>
@@ -268,7 +248,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* 7 Tables Card Grid */}
+        {/* 7 Tables Responsive Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {sevenTables.map((table) => {
             const tableOrder = orders.find((o) => o.tableNumber === table.number && o.status !== "SERVED");
@@ -358,27 +338,27 @@ export default function HomePage() {
             );
           })}
 
-          {/* 8th Callout Box: Back-Office Hub */}
+          {/* 8th Card: Customer Private Event / Booking Box */}
           <div className="bg-espresso-950 text-white rounded-3xl p-6 shadow-xl flex flex-col justify-between border border-gold-500/30 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-gold-500/10 rounded-full blur-2xl pointer-events-none" />
 
             <div>
               <div className="w-10 h-10 rounded-xl bg-gold-500/20 border border-gold-400/40 text-gold-300 flex items-center justify-center mb-4">
-                <LayoutDashboard className="w-5 h-5" />
+                <Calendar className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-serif font-bold text-white">Manager QR Hub</h3>
+              <h3 className="text-xl font-serif font-bold text-white">Private Gatherings</h3>
               <p className="text-xs text-stone-300 mt-2 leading-relaxed">
-                Need to regenerate cryptographic salts, print acrylic stands for physical tables, or monitor live GMV?
+                Hosting a private cupping masterclass or intimate celebration across all 7 tables?
               </p>
             </div>
 
-            <Link
-              href="/admin/dashboard"
+            <a
+              href="tel:+919876543210"
               className="mt-6 py-2.5 bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-400 hover:to-amber-500 text-espresso-950 font-bold rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow-gold-glow"
             >
-              <span>Open Back-Office CRM</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </Link>
+              <span>Reserve Whole Floor</span>
+              <Phone className="w-3.5 h-3.5" />
+            </a>
           </div>
         </div>
       </section>
@@ -431,9 +411,9 @@ export default function HomePage() {
               <div className="w-10 h-10 rounded-xl bg-gold-500/20 text-gold-300 flex items-center justify-center font-bold">
                 04
               </div>
-              <h3 className="font-serif text-lg font-bold text-white">Zero-Latency Kitchen KDS</h3>
+              <h3 className="font-serif text-lg font-bold text-white">Artisan Speed & Care</h3>
               <p className="text-xs text-stone-400 leading-relaxed">
-                Kitchen displays receive orders with real-time acoustic chimes, allowing baristas and chefs to prioritize tickets instantly.
+                Dual-boiler Italian extraction systems calibrated for 4-minute barista turnarounds without ever cutting corners on temperature or froth.
               </p>
             </div>
           </div>
@@ -607,7 +587,7 @@ export default function HomePage() {
       </section>
 
       {/* ======================================================== */}
-      {/* 6. GRAND CAFE FOOTER */}
+      {/* 6. GRAND CAFE FOOTER WITH DISCREET HIDDEN STAFF PORTAL */}
       {/* ======================================================== */}
       <footer className="bg-espresso-950 text-stone-400 pt-16 pb-12 border-t border-gold-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
@@ -653,31 +633,55 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Quick Route Links */}
+          {/* Guest Navigation */}
           <div className="space-y-3 text-xs">
-            <h4 className="font-display uppercase tracking-widest text-white text-xs">Live System Views</h4>
+            <h4 className="font-display uppercase tracking-widest text-white text-xs">Guest Experience</h4>
             <ul className="space-y-2 font-light">
               <li>
+                <a href="#tables-section" className="hover:text-gold-300 transition">
+                  Browse 7 Tables
+                </a>
+              </li>
+              <li>
+                <a href="#menu-section" className="hover:text-gold-300 transition">
+                  Seasonal Menu
+                </a>
+              </li>
+              <li>
                 <Link href="/order?table=1" className="hover:text-gold-300 transition">
-                  Guest Table #1 View
-                </Link>
-              </li>
-              <li>
-                <Link href="/staff/kds" className="hover:text-orange-300 transition">
-                  Kitchen Display System (KDS)
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/dashboard" className="hover:text-gold-300 transition">
-                  Admin Command Hub & POS
+                  Dine-In Mobile Ordering
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 border-t border-stone-800 text-center text-xs text-stone-500 font-light">
-          © {new Date().getFullYear()} Aura Artisan Roastery & Slow-Fermented Kitchen. Built with Next.js App Router, Tailwind CSS, and Cryptographic HMAC QR Session Security.
+        {/* Bottom Bar: Copyright on Left, Discreet Hidden Staff Access on Right */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 border-t border-stone-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500 font-light">
+          <div>
+            © {new Date().getFullYear()} Aura Artisan Roastery & Slow-Fermented Kitchen. All rights reserved.
+          </div>
+
+          {/* Discreet Staff Portal (Hidden from ordinary customers) */}
+          <div className="flex items-center gap-3 text-[11px] text-stone-700 hover:text-stone-400 transition-colors">
+            <span className="flex items-center gap-1 opacity-50">
+              <Lock className="w-3 h-3" />
+              <span>Staff:</span>
+            </span>
+            <Link
+              href="/staff/kds"
+              className="hover:text-gold-400 transition underline underline-offset-4 decoration-stone-800"
+            >
+              Kitchen (KDS)
+            </Link>
+            <span className="opacity-30">•</span>
+            <Link
+              href="/admin/dashboard"
+              className="hover:text-gold-400 transition underline underline-offset-4 decoration-stone-800"
+            >
+              Manager Hub
+            </Link>
+          </div>
         </div>
       </footer>
 
