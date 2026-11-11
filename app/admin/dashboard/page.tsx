@@ -107,37 +107,38 @@ export default function AdminDashboardPage() {
   const occupancyRate = Math.round((occupiedCount / (tables.length || 1)) * 100);
 
   return (
-    <div className="min-h-screen bg-stone-100 text-stone-900 pb-16">
+    <div className="min-h-screen bg-[#fcfaf2] text-garden-950 pb-16">
       {/* Admin Top Banner */}
-      <div className="bg-white border-b border-stone-200">
+      <div className="bg-garden-950 text-white border-b-2 border-gold-400/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-700 flex items-center justify-center text-white shadow-sm">
-              <LayoutDashboard className="w-5 h-5" />
+            <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-gold-400 bg-black shadow-gold-glow flex-shrink-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/logo.jpg" alt="Swade Allade Logo" className="w-full h-full object-cover" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-stone-900">Aura Cafe Command Center</h1>
-              <p className="text-xs text-stone-500">Back-office CRM, Dynamic QR Management & POS Billing</p>
+              <h1 className="text-xl font-bold text-gold-300">Swade Allade Command Center</h1>
+              <p className="text-xs text-emerald-200/80">স্বাদে আহ্লাদে • Back-office CRM, Dynamic QR Engine & POS Billing</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
             <button
               onClick={() => refreshState()}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-lg text-xs font-semibold border border-stone-200 transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-garden-800 hover:bg-garden-700 text-gold-200 rounded-lg text-xs font-semibold border border-gold-400/30 transition"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Refresh Metrics</span>
             </button>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-garden-900 text-emerald-300 border border-emerald-500/40">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               Store Open
             </span>
           </div>
         </div>
 
         {/* Tab Navigation */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex gap-1 sm:gap-2 overflow-x-auto no-scrollbar border-t border-stone-100 pt-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex gap-1 sm:gap-2 overflow-x-auto no-scrollbar border-t border-garden-800 pt-2 bg-white">
           {[
             { id: "overview", label: "Overview & Floor", icon: LayoutDashboard },
             { id: "tables", label: "Dynamic Table QRs", icon: QrCode },
@@ -152,10 +153,10 @@ export default function AdminDashboardPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-t-lg transition border-b-2 whitespace-nowrap ${
+                className={`flex items-center gap-2 px-4 py-2.5 text-xs font-bold rounded-t-lg transition border-b-2 whitespace-nowrap ${
                   isActive
-                    ? "border-amber-700 text-amber-800 bg-amber-50/50"
-                    : "border-transparent text-stone-600 hover:text-stone-900 hover:bg-stone-50"
+                    ? "border-garden-700 text-garden-900 bg-garden-50"
+                    : "border-transparent text-stone-600 hover:text-garden-900 hover:bg-stone-50"
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -335,16 +336,17 @@ export default function AdminDashboardPage() {
                 {/* Physical Table Acrylic Stand Preview */}
                 <div
                   id="printable-table-qr"
-                  className="w-72 bg-white border-2 border-stone-900 rounded-3xl p-6 shadow-2xl flex flex-col items-center text-center relative overflow-hidden"
+                  className="w-72 bg-gradient-to-b from-garden-950 to-garden-900 border-2 border-gold-400 rounded-3xl p-6 shadow-2xl flex flex-col items-center text-center relative overflow-hidden text-white"
                 >
-                  <div className="w-10 h-10 rounded-2xl bg-stone-900 text-amber-400 flex items-center justify-center mb-2">
-                    <Coffee className="w-5 h-5" />
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gold-400 bg-black mb-2 shadow-gold-glow">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/images/logo.jpg" alt="Swade Allade Logo" className="w-full h-full object-cover" />
                   </div>
-                  <div className="text-xs font-black uppercase tracking-widest text-stone-900">Aura Cafe</div>
-                  <div className="text-xs text-stone-500 font-medium">Scan to Order & Pay</div>
+                  <div className="text-sm font-bold text-gold-300">স্বাদে আহ্লাদে ক্যাফেটেরিয়া</div>
+                  <div className="text-xs text-emerald-200 font-medium">Scan to Order & Pay</div>
 
                   {/* QR Image */}
-                  <div className="my-4 p-2 bg-white rounded-2xl border border-stone-200 shadow-inner">
+                  <div className="my-4 p-2.5 bg-white rounded-2xl border-2 border-gold-400 shadow-inner">
                     {qrDataUrl ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img src={qrDataUrl} alt={`QR for ${selectedTable.label}`} className="w-48 h-48 rounded-xl" />
@@ -355,13 +357,13 @@ export default function AdminDashboardPage() {
                     )}
                   </div>
 
-                  <div className="text-xl font-black text-stone-900">{selectedTable.label}</div>
-                  <div className="text-[10px] text-stone-400 font-mono mt-1">
+                  <div className="text-xl font-black text-gold-300">{selectedTable.label}</div>
+                  <div className="text-[10px] text-emerald-200/70 font-mono mt-1">
                     Salt: {selectedTable.secretSalt.slice(0, 14)}...
                   </div>
 
-                  <div className="mt-3 pt-3 border-t border-stone-100 w-full text-[9px] text-stone-400">
-                    No App Download Required • Tap to Pay
+                  <div className="mt-3 pt-3 border-t border-garden-700 w-full text-[9px] text-gold-300/80">
+                    www.swadeallade.com • Tap to Pay
                   </div>
                 </div>
 
@@ -584,15 +586,15 @@ export default function AdminDashboardPage() {
               <h3 className="font-bold text-stone-900 text-sm">Top 5 Bestselling Items</h3>
               <div className="space-y-2 pt-2">
                 {[
-                  { name: "Artisanal Flat White", count: 48, revenue: "₹13,680" },
-                  { name: "Truffled Sourdough Avocado Toast", count: 32, revenue: "₹12,160" },
-                  { name: "Valencia Orange Cold Brew", count: 29, revenue: "₹7,830" },
-                  { name: "Classic French Butter Croissant", count: 24, revenue: "₹4,320" },
-                  { name: "Crispy Katsu Chicken Sando", count: 19, revenue: "₹8,360" },
+                  { name: "Royal Saffron Chicken Biryani", count: 52, revenue: "₹16,640" },
+                  { name: "Smoky Charcoal Chicken Tikka Kebab", count: 44, revenue: "₹14,960" },
+                  { name: "Kolkata Street Hakka Noodles & Chilli Chicken", count: 38, revenue: "₹11,210" },
+                  { name: "Swade Signature Cold Coffee & Gelato", count: 35, revenue: "₹6,650" },
+                  { name: "Creamy Alfredo Olive & Mushroom Penne", count: 24, revenue: "₹7,440" },
                 ].map((item, idx) => (
                   <div key={item.name} className="flex justify-between items-center text-xs p-2 rounded-lg bg-stone-50">
                     <div className="flex items-center gap-2">
-                      <span className="w-5 h-5 rounded-full bg-amber-700 text-white font-bold flex items-center justify-center text-[10px]">
+                      <span className="w-5 h-5 rounded-full bg-garden-700 text-gold-300 font-bold flex items-center justify-center text-[10px]">
                         {idx + 1}
                       </span>
                       <span className="font-semibold text-stone-900">{item.name}</span>

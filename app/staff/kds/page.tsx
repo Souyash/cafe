@@ -73,19 +73,22 @@ export default function KitchenDisplayPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col">
+    <div className="min-h-screen bg-garden-950 text-stone-100 flex flex-col">
       {/* KDS Kitchen Header Bar */}
-      <header className="bg-stone-900 border-b border-stone-800 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      <header className="bg-garden-900 border-b border-gold-400/30 px-6 py-4 flex flex-wrap items-center justify-between gap-4 shadow-lg">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-orange-600 flex items-center justify-center text-white shadow-lg">
-            <UtensilsCrossed className="w-6 h-6" />
+          <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-gold-400 bg-black shadow-gold-glow flex-shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/logo.jpg" alt="Swade Allade Logo" className="w-full h-full object-cover" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-black tracking-tight text-white">Kitchen Display System (KDS)</h1>
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              <h1 className="text-xl font-black tracking-tight text-gold-300">
+                Swade Allade Kitchen Display (KDS)
+              </h1>
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
             </div>
-            <p className="text-xs text-stone-400">Live ticket queue synchronized with guest QR orders</p>
+            <p className="text-xs text-emerald-200/80">স্বাদে আহ্লাদে • Live ticket queue for the 7 bamboo tables</p>
           </div>
         </div>
 

@@ -5,7 +5,7 @@ export interface MenuItem {
   name: string;
   description: string;
   price: number;
-  category: "Brews" | "Bakery" | "Mains" | "Combos";
+  category: "Indian" | "Tandoor" | "Chinese" | "Continental" | "Brews";
   dietary: "VEG" | "NON_VEG" | "VEGAN";
   isAvailable: boolean;
   prepTime: number; // minutes
@@ -22,7 +22,7 @@ export interface CafeTable {
   id: string;
   number: number;
   label: string;
-  zone: "Indoor Main" | "Patio" | "Rooftop" | "Bar Counter";
+  zone: "Bamboo Cottage" | "Garden Patio" | "Fairy Pavilion";
   capacity: number;
   status: "AVAILABLE" | "OCCUPIED" | "BILL_REQUESTED";
   secretSalt: string;
@@ -92,194 +92,196 @@ export interface BillInvoice {
   items: OrderItem[];
 }
 
-// Initial Menu
+// Initial Menu featuring Indian, Tandoor, Chinese, Continental & Cafe Brews
 const INITIAL_MENU: MenuItem[] = [
   {
-    id: "brew-1",
-    name: "Artisanal Flat White",
-    description: "Double espresso ristretto extraction with silky steamed micro-foam.",
-    price: 240,
-    category: "Brews",
+    id: "ind-1",
+    name: "Royal Saffron Chicken Biryani",
+    description: "Long-grain basmati slow-cooked in dum with aromatic saffron, fried onions & raita.",
+    price: 320,
+    category: "Indian",
+    dietary: "NON_VEG",
+    isAvailable: true,
+    prepTime: 18,
+    imageUrl: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+    addonGroups: [
+      {
+        id: "biryani-addon",
+        name: "Accompaniments",
+        type: "single",
+        options: [
+          { id: "raita-std", name: "Mint Boondi Raita", price: 0, isDefault: true },
+          { id: "extra-egg", name: "Add Masala Boiled Egg", price: 35 },
+          { id: "extra-kebab", name: "Add 2pc Chicken Tikka", price: 110 },
+        ],
+      },
+    ],
+  },
+  {
+    id: "ind-2",
+    name: "Paneer Butter Masala & Garlic Naan",
+    description: "Velvety tomato-cashew makhani gravy with char-grilled malai paneer and 2 butter naans.",
+    price: 290,
+    category: "Indian",
+    dietary: "VEG",
+    isAvailable: true,
+    prepTime: 15,
+    imageUrl: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    id: "tan-1",
+    name: "Smoky Charcoal Chicken Tikka Kebab",
+    description: "Tender morsels marinated overnight in hung curd, Kashmiri chili & roasted cumin over charcoal.",
+    price: 340,
+    category: "Tandoor",
+    dietary: "NON_VEG",
+    isAvailable: true,
+    prepTime: 16,
+    imageUrl: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80",
+    addonGroups: [
+      {
+        id: "spice-lvl",
+        name: "Spice Level",
+        type: "single",
+        options: [
+          { id: "sp-mild", name: "Mild & Smoky", price: 0 },
+          { id: "sp-med", name: "Classic Medium", price: 0, isDefault: true },
+          { id: "sp-hot", name: "Fiery Desi Tadka", price: 0 },
+        ],
+      },
+    ],
+  },
+  {
+    id: "tan-2",
+    name: "Tandoori Malai Broccoli & Paneer Platter",
+    description: "Creamy cardamom-marinated paneer & florets blistered in the clay tandoor with mint chutney.",
+    price: 280,
+    category: "Tandoor",
+    dietary: "VEG",
+    isAvailable: true,
+    prepTime: 14,
+    imageUrl: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    id: "chi-1",
+    name: "Kolkata Street Hakka Noodles & Chilli Chicken",
+    description: "Wok-tossed smoky noodles paired with crispy garlic-soy chilli chicken & spring onions.",
+    price: 295,
+    category: "Chinese",
+    dietary: "NON_VEG",
+    isAvailable: true,
+    prepTime: 12,
+    imageUrl: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    id: "chi-2",
+    name: "Crispy Honey Chilli Lotus Stem & Fried Rice",
+    description: "Golden glazed lotus stems tossed with roasted sesame, served over burnt garlic veg fried rice.",
+    price: 260,
+    category: "Chinese",
     dietary: "VEGAN",
     isAvailable: true,
+    prepTime: 12,
+    imageUrl: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    id: "con-1",
+    name: "Creamy Alfredo Olive & Mushroom Penne",
+    description: "Al-dante penne folded in aged parmesan garlic cream sauce with black olives & herb garlic bread.",
+    price: 310,
+    category: "Continental",
+    dietary: "VEG",
+    isAvailable: true,
+    prepTime: 14,
+    imageUrl: "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=600&q=80",
+    addonGroups: [
+      {
+        id: "pasta-top",
+        name: "Add-ons",
+        type: "single",
+        options: [
+          { id: "p-veg", name: "Standard Herb Veg", price: 0, isDefault: true },
+          { id: "p-chk", name: "Add Herb Grilled Chicken", price: 80 },
+          { id: "p-chs", name: "Extra Baked Mozzarella", price: 55 },
+        ],
+      },
+    ],
+  },
+  {
+    id: "con-2",
+    name: "Herb-Crusted Chicken Steak & Mash",
+    description: "Pan-seared rosemary chicken breast with truffle mashed potatoes, sautéed greens & pepper jus.",
+    price: 390,
+    category: "Continental",
+    dietary: "NON_VEG",
+    isAvailable: true,
+    prepTime: 18,
+    imageUrl: "https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    id: "brew-1",
+    name: "Swade Signature Cold Coffee & Gelato",
+    description: "Double espresso shaken with velvety cream and topped with a scoop of Belgian vanilla.",
+    price: 190,
+    category: "Brews",
+    dietary: "VEG",
+    isAvailable: true,
     prepTime: 5,
-    imageUrl: "https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
     addonGroups: [
       {
         id: "milk",
         name: "Choice of Milk",
         type: "single",
         options: [
-          { id: "milk-whole", name: "Whole Dairy Milk", price: 0, isDefault: true },
-          { id: "milk-oat", name: "Oatly Barista Edition", price: 45 },
-          { id: "milk-almond", name: "Roasted Almond Milk", price: 45 },
+          { id: "milk-whole", name: "Classic Dairy Cream", price: 0, isDefault: true },
+          { id: "milk-oat", name: "Oat Milk Upgrade", price: 45 },
         ],
       },
       {
         id: "shot",
-        name: "Espresso Shots",
+        name: "Espresso Boost",
         type: "single",
         options: [
-          { id: "shot-reg", name: "Standard Double Shot", price: 0, isDefault: true },
-          { id: "shot-extra", name: "Extra Espresso Shot", price: 50 },
+          { id: "shot-reg", name: "Standard Roast", price: 0, isDefault: true },
+          { id: "shot-extra", name: "Extra Espresso Shot", price: 45 },
         ],
       },
     ],
   },
   {
     id: "brew-2",
-    name: "Ethiopian Yirgacheffe Pour-Over",
-    description: "Single-origin pour-over with jasmine floral aroma, peach & citrus notes.",
-    price: 290,
+    name: "Mango Mint Garden Cooler",
+    description: "Chilled Alphonso mango fizz muddled with fresh garden mint and lime zest.",
+    price: 150,
     category: "Brews",
     dietary: "VEGAN",
     isAvailable: true,
-    prepTime: 8,
-    imageUrl: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
+    prepTime: 4,
+    imageUrl: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "brew-3",
-    name: "Valencia Orange Cold Brew",
-    description: "18-hour slow steeped dark roast poured over sparkling tonic and fresh orange wheel.",
-    price: 270,
+    name: "Artisanal Hazelnut Cappuccino",
+    description: "100% Arabica espresso shot poured with roasted hazelnut syrup and silky micro-foam.",
+    price: 175,
     category: "Brews",
-    dietary: "VEGAN",
-    isAvailable: true,
-    prepTime: 4,
-    imageUrl: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: "brew-4",
-    name: "Kyoto Ceremonial Matcha Latte",
-    description: "Stone-ground Uji matcha whisked with Madagascar vanilla and choice of milk.",
-    price: 310,
-    category: "Brews",
-    dietary: "VEGAN",
-    isAvailable: true,
-    prepTime: 6,
-    imageUrl: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80",
-    addonGroups: [
-      {
-        id: "milk-matcha",
-        name: "Choice of Milk",
-        type: "single",
-        options: [
-          { id: "m-dairy", name: "Standard Whole Milk", price: 0, isDefault: true },
-          { id: "m-oat", name: "Oatly Barista", price: 45 },
-        ],
-      },
-    ],
-  },
-  {
-    id: "bakery-1",
-    name: "Classic French Butter Croissant",
-    description: "Hand-laminated flaky 32-layer Normandy butter pastry baked golden brown.",
-    price: 180,
-    category: "Bakery",
     dietary: "VEG",
     isAvailable: true,
-    prepTime: 3,
-    imageUrl: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: "bakery-2",
-    name: "Belgian Dark Chocolate Pain au Chocolat",
-    description: "Layered sourdough viennoiserie stuffed with 70% Callebaut dark chocolate batons.",
-    price: 220,
-    category: "Bakery",
-    dietary: "VEG",
-    isAvailable: true,
-    prepTime: 3,
-    imageUrl: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: "bakery-3",
-    name: "Burnt Basque Cheesecake Slice",
-    description: "Caramelized crust with an ultra-creamy, molten vanilla bean custard center.",
-    price: 320,
-    category: "Bakery",
-    dietary: "CONTAINS_EGG" as unknown as "VEG",
-    isAvailable: true,
-    prepTime: 4,
-    imageUrl: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: "main-1",
-    name: "Truffled Sourdough Avocado Toast",
-    description: "Crushed Hass avocado on toasted levain sourdough, marinated heirloom tomatoes, feta & truffle drizzle.",
-    price: 380,
-    category: "Mains",
-    dietary: "VEG",
-    isAvailable: true,
-    prepTime: 12,
-    imageUrl: "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=600&q=80",
-    addonGroups: [
-      {
-        id: "eggs",
-        name: "Add-ons",
-        type: "single",
-        options: [
-          { id: "egg-poached", name: "Organic Poached Egg (+₹50)", price: 50 },
-          { id: "extra-feta", name: "Extra Crumbled Feta (+₹40)", price: 40 },
-        ],
-      },
-    ],
-  },
-  {
-    id: "main-2",
-    name: "Crispy Katsu Chicken Sando",
-    description: "Panko-crusted chicken fillet with Japanese sesame cabbage slaw, tonkatsu glaze in fluffy milk bread.",
-    price: 440,
-    category: "Mains",
-    dietary: "NON_VEG",
-    isAvailable: true,
-    prepTime: 15,
-    imageUrl: "https://images.unsplash.com/photo-1628191010210-a59de33e5941?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: "main-3",
-    name: "Wild Mushroom & Truffle Melt",
-    description: "Portobello and shiitake mushrooms sautéed in thyme butter with Gruyere cheese on toasted brioche.",
-    price: 410,
-    category: "Mains",
-    dietary: "VEG",
-    isAvailable: true,
-    prepTime: 14,
-    imageUrl: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: "combo-1",
-    name: "The Parisian Morning Combo",
-    description: "Flaky Normandy Croissant paired with your choice of Artisanal Flat White or Cappuccino.",
-    price: 360,
-    category: "Combos",
-    dietary: "VEG",
-    isAvailable: true,
-    prepTime: 7,
-    imageUrl: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: "combo-2",
-    name: "Artisan Power Lunch",
-    description: "Truffled Avocado Toast or Katsu Sando + Sparkling Orange Cold Brew with sea salt potato crisps.",
-    price: 580,
-    category: "Combos",
-    dietary: "NON_VEG",
-    isAvailable: true,
-    prepTime: 15,
-    imageUrl: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80",
+    prepTime: 5,
+    imageUrl: "https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&w=600&q=80",
   },
 ];
 
-// Initial Tables - Exactly 7 Physical Tables
+// Initial Tables - Exactly 7 Physical Bamboo Cottage & Garden Tables
 const INITIAL_TABLES: CafeTable[] = [
-  { id: "tbl-1", number: 1, label: "Table 1", zone: "Indoor Main", capacity: 2, status: "OCCUPIED", secretSalt: "salt_tbl_1_2026" },
-  { id: "tbl-2", number: 2, label: "Table 2", zone: "Indoor Main", capacity: 4, status: "OCCUPIED", secretSalt: "salt_tbl_2_2026" },
-  { id: "tbl-3", number: 3, label: "Table 3", zone: "Indoor Main", capacity: 4, status: "AVAILABLE", secretSalt: "salt_tbl_3_2026" },
-  { id: "tbl-4", number: 4, label: "Table 4", zone: "Indoor Main", capacity: 6, status: "AVAILABLE", secretSalt: "salt_tbl_4_2026" },
-  { id: "tbl-5", number: 5, label: "Table 5", zone: "Patio", capacity: 2, status: "OCCUPIED", secretSalt: "salt_tbl_5_2026" },
-  { id: "tbl-6", number: 6, label: "Table 6", zone: "Patio", capacity: 4, status: "AVAILABLE", secretSalt: "salt_tbl_6_2026" },
-  { id: "tbl-7", number: 7, label: "Table 7", zone: "Rooftop", capacity: 4, status: "BILL_REQUESTED", secretSalt: "salt_tbl_7_2026" },
+  { id: "tbl-1", number: 1, label: "Cottage Table 1", zone: "Bamboo Cottage", capacity: 2, status: "OCCUPIED", secretSalt: "salt_tbl_1_2026" },
+  { id: "tbl-2", number: 2, label: "Cottage Table 2", zone: "Bamboo Cottage", capacity: 4, status: "OCCUPIED", secretSalt: "salt_tbl_2_2026" },
+  { id: "tbl-3", number: 3, label: "Cottage Table 3", zone: "Bamboo Cottage", capacity: 4, status: "AVAILABLE", secretSalt: "salt_tbl_3_2026" },
+  { id: "tbl-4", number: 4, label: "Cottage Table 4", zone: "Bamboo Cottage", capacity: 6, status: "AVAILABLE", secretSalt: "salt_tbl_4_2026" },
+  { id: "tbl-5", number: 5, label: "Garden Table 5", zone: "Garden Patio", capacity: 2, status: "OCCUPIED", secretSalt: "salt_tbl_5_2026" },
+  { id: "tbl-6", number: 6, label: "Garden Table 6", zone: "Garden Patio", capacity: 4, status: "AVAILABLE", secretSalt: "salt_tbl_6_2026" },
+  { id: "tbl-7", number: 7, label: "Pavilion Table 7", zone: "Fairy Pavilion", capacity: 6, status: "BILL_REQUESTED", secretSalt: "salt_tbl_7_2026" },
 ];
 
 // Initial Orders
@@ -289,7 +291,7 @@ const INITIAL_ORDERS: Order[] = [
     orderNumber: 101,
     tableNumber: 1,
     tableId: "tbl-1",
-    customerName: "Aarav Sharma",
+    customerName: "Souvik Chatterjee",
     customerPhone: "9876543210",
     status: "PLACED",
     paymentStatus: "PENDING",
@@ -297,25 +299,25 @@ const INITIAL_ORDERS: Order[] = [
       {
         id: "item-1",
         menuItemId: "brew-1",
-        name: "Artisanal Flat White",
-        price: 285,
+        name: "Swade Signature Cold Coffee & Gelato",
+        price: 235,
         quantity: 2,
-        addons: [{ id: "milk-oat", name: "Oatly Barista Edition", price: 45 }],
-        notes: "Extra hot please",
+        addons: [{ id: "shot-extra", name: "Extra Espresso Shot", price: 45 }],
+        notes: "Serve extra chilled",
       },
       {
         id: "item-2",
-        menuItemId: "bakery-1",
-        name: "Classic French Butter Croissant",
-        price: 180,
+        menuItemId: "tan-1",
+        name: "Smoky Charcoal Chicken Tikka Kebab",
+        price: 340,
         quantity: 1,
       },
     ],
-    subtotal: 750,
-    gst: 37.5,
+    subtotal: 810,
+    gst: 40.5,
     discount: 0,
-    total: 787.5,
-    specialInstructions: "Please serve croissant warm with salted butter",
+    total: 850.5,
+    specialInstructions: "Extra mint chutney on the side",
     createdAt: new Date(Date.now() - 4 * 60 * 1000).toISOString(),
     updatedAt: new Date(Date.now() - 4 * 60 * 1000).toISOString(),
   },
@@ -324,31 +326,30 @@ const INITIAL_ORDERS: Order[] = [
     orderNumber: 102,
     tableNumber: 2,
     tableId: "tbl-2",
-    customerName: "Priya Patel",
+    customerName: "Riya Banerjee",
     customerPhone: "9812345678",
     status: "IN_KITCHEN",
     paymentStatus: "PENDING",
     items: [
       {
         id: "item-3",
-        menuItemId: "main-1",
-        name: "Truffled Sourdough Avocado Toast",
-        price: 430,
+        menuItemId: "chi-1",
+        name: "Kolkata Street Hakka Noodles & Chilli Chicken",
+        price: 295,
         quantity: 1,
-        addons: [{ id: "egg-poached", name: "Organic Poached Egg", price: 50 }],
       },
       {
         id: "item-4",
-        menuItemId: "brew-3",
-        name: "Valencia Orange Cold Brew",
-        price: 270,
-        quantity: 1,
+        menuItemId: "brew-2",
+        name: "Mango Mint Garden Cooler",
+        price: 150,
+        quantity: 2,
       },
     ],
-    subtotal: 700,
-    gst: 35,
+    subtotal: 595,
+    gst: 29.75,
     discount: 0,
-    total: 735,
+    total: 624.75,
     createdAt: new Date(Date.now() - 11 * 60 * 1000).toISOString(),
     updatedAt: new Date(Date.now() - 6 * 60 * 1000).toISOString(),
   },
@@ -357,30 +358,30 @@ const INITIAL_ORDERS: Order[] = [
     orderNumber: 103,
     tableNumber: 5,
     tableId: "tbl-5",
-    customerName: "Rohan Varma",
+    customerName: "Arjun Mukherjee",
     customerPhone: "9988776655",
     status: "READY_TO_SERVE",
     paymentStatus: "PENDING",
     items: [
       {
         id: "item-5",
-        menuItemId: "main-2",
-        name: "Crispy Katsu Chicken Sando",
-        price: 440,
+        menuItemId: "con-1",
+        name: "Creamy Alfredo Olive & Mushroom Penne",
+        price: 310,
         quantity: 1,
       },
       {
         id: "item-6",
-        menuItemId: "brew-4",
-        name: "Kyoto Ceremonial Matcha Latte",
-        price: 310,
+        menuItemId: "brew-3",
+        name: "Artisanal Hazelnut Cappuccino",
+        price: 175,
         quantity: 1,
       },
     ],
-    subtotal: 750,
-    gst: 37.5,
+    subtotal: 485,
+    gst: 24.25,
     discount: 0,
-    total: 787.5,
+    total: 509.25,
     createdAt: new Date(Date.now() - 18 * 60 * 1000).toISOString(),
     updatedAt: new Date(Date.now() - 2 * 60 * 1000).toISOString(),
   },
@@ -389,23 +390,23 @@ const INITIAL_ORDERS: Order[] = [
     orderNumber: 104,
     tableNumber: 7,
     tableId: "tbl-7",
-    customerName: "Ananya Deshmukh",
+    customerName: "Ananya Sen",
     customerPhone: "9123456789",
     status: "SERVED",
     paymentStatus: "PENDING",
     items: [
       {
         id: "item-7",
-        menuItemId: "combo-1",
-        name: "The Parisian Morning Combo",
-        price: 360,
+        menuItemId: "ind-1",
+        name: "Royal Saffron Chicken Biryani",
+        price: 320,
         quantity: 2,
       },
     ],
-    subtotal: 720,
-    gst: 36,
+    subtotal: 640,
+    gst: 32,
     discount: 50,
-    total: 706,
+    total: 622,
     createdAt: new Date(Date.now() - 35 * 60 * 1000).toISOString(),
     updatedAt: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
   },
@@ -413,11 +414,11 @@ const INITIAL_ORDERS: Order[] = [
 
 // Initial Customers / Loyalty
 const INITIAL_CUSTOMERS: Customer[] = [
-  { id: "cust-1", phone: "9876543210", name: "Aarav Sharma", loyaltyPoints: 420, totalSpent: 8450, visitsCount: 11, lastVisit: "Today" },
-  { id: "cust-2", phone: "9812345678", name: "Priya Patel", loyaltyPoints: 280, totalSpent: 5200, visitsCount: 6, lastVisit: "Today" },
-  { id: "cust-3", phone: "9988776655", name: "Rohan Varma", loyaltyPoints: 650, totalSpent: 13900, visitsCount: 18, lastVisit: "Today" },
-  { id: "cust-4", phone: "9123456789", name: "Ananya Deshmukh", loyaltyPoints: 190, totalSpent: 3800, visitsCount: 4, lastVisit: "Today" },
-  { id: "cust-5", phone: "9820011223", name: "Vikram Malhotra", loyaltyPoints: 940, totalSpent: 22400, visitsCount: 29, lastVisit: "Yesterday" },
+  { id: "cust-1", phone: "9876543210", name: "Souvik Chatterjee", loyaltyPoints: 420, totalSpent: 8450, visitsCount: 11, lastVisit: "Today" },
+  { id: "cust-2", phone: "9812345678", name: "Riya Banerjee", loyaltyPoints: 280, totalSpent: 5200, visitsCount: 6, lastVisit: "Today" },
+  { id: "cust-3", phone: "9988776655", name: "Arjun Mukherjee", loyaltyPoints: 650, totalSpent: 13900, visitsCount: 18, lastVisit: "Today" },
+  { id: "cust-4", phone: "9123456789", name: "Ananya Sen", loyaltyPoints: 190, totalSpent: 3800, visitsCount: 4, lastVisit: "Today" },
+  { id: "cust-5", phone: "9820011223", name: "Debashis Roy", loyaltyPoints: 940, totalSpent: 22400, visitsCount: 29, lastVisit: "Yesterday" },
 ];
 
 // In-Memory Global Store for Live Session
@@ -456,16 +457,14 @@ class CafeStore {
     };
     this.orders.unshift(newOrder);
 
-    // Update table status to OCCUPIED
     const table = this.tables.find((t) => t.number === order.tableNumber);
     if (table) {
       table.status = "OCCUPIED";
     }
 
-    // Update customer loyalty if phone provided
     if (order.customerPhone) {
       let cust = this.customers.find((c) => c.phone === order.customerPhone);
-      const earnedPoints = Math.floor(order.total * 0.05); // 5% points
+      const earnedPoints = Math.floor(order.total * 0.05);
       if (cust) {
         cust.loyaltyPoints += earnedPoints;
         cust.totalSpent += order.total;
@@ -476,7 +475,7 @@ class CafeStore {
         cust = {
           id: `cust-${Date.now()}`,
           phone: order.customerPhone,
-          name: order.customerName || "Cafe Patron",
+          name: order.customerName || "Swade Patron",
           loyaltyPoints: earnedPoints,
           totalSpent: order.total,
           visitsCount: 1,
@@ -540,7 +539,6 @@ class CafeStore {
 
     this.bills.push(invoice);
 
-    // Free up table or mark available
     const table = this.tables.find((t) => t.number === params.tableNumber);
     if (table) {
       table.status = "AVAILABLE";
@@ -550,8 +548,6 @@ class CafeStore {
   }
 }
 
-// Global singleton across serverless invocations in dev
 const globalForCafe = global as unknown as { cafeStore: CafeStore };
 export const cafeStore = globalForCafe.cafeStore || new CafeStore();
 if (process.env.NODE_ENV !== "production") globalForCafe.cafeStore = cafeStore;
-

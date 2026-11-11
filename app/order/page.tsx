@@ -72,7 +72,7 @@ function GuestOrderContent() {
   const activeOrder = tableOrders[0]; // Most recent order
 
   // Dietary filter helper
-  const categories = ["All", "Brews", "Bakery", "Mains", "Combos"];
+  const categories = ["All", "Indian", "Tandoor", "Chinese", "Continental", "Brews"];
 
   const filteredMenu = useMemo(() => {
     return menu.filter((item) => {
@@ -205,46 +205,47 @@ function GuestOrderContent() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 pb-28 text-stone-900 max-w-md mx-auto relative shadow-2xl">
+    <div className="min-h-screen bg-[#fcfaf2] pb-28 text-garden-950 max-w-md mx-auto relative shadow-2xl">
       {/* Brand & Table Header */}
-      <header className="sticky top-0 z-30 bg-stone-900 text-stone-100 px-4 py-3 border-b border-stone-800 flex items-center justify-between shadow-md">
+      <header className="sticky top-0 z-30 bg-garden-950 text-stone-100 px-4 py-3 border-b border-gold-400/30 flex items-center justify-between shadow-md">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-amber-600 flex items-center justify-center text-white shadow-sm">
-            <Coffee className="w-5 h-5" />
+          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gold-400 bg-black shadow-sm flex-shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/logo.jpg" alt="Swade Allade Logo" className="w-full h-full object-cover" />
           </div>
           <div>
-            <div className="text-[10px] uppercase font-bold tracking-widest text-amber-400">Aura Artisan Cafe</div>
+            <div className="text-[11px] font-bold tracking-wide text-gold-300">স্বাদে আহ্লাদে ক্যাফেটেরিয়া</div>
             <div className="flex items-center gap-2">
-              <h1 className="text-base font-bold text-white">Table #{tableNum}</h1>
-              <span className="text-[11px] px-2 py-0.2 rounded-full bg-stone-800 text-stone-300 border border-stone-700">
-                {currentTable?.zone || "Dine-in"}
+              <h1 className="text-sm font-bold text-white">Table #{tableNum}</h1>
+              <span className="text-[10px] px-2 py-0.2 rounded-full bg-garden-800 text-emerald-200 border border-garden-700">
+                {currentTable?.zone || "Garden Seat"}
               </span>
             </div>
           </div>
         </div>
 
         {/* Security badge */}
-        <div className="flex items-center gap-1 text-[11px] font-medium bg-emerald-950/80 text-emerald-400 border border-emerald-800/80 px-2.5 py-1 rounded-full">
+        <div className="flex items-center gap-1 text-[10px] font-semibold bg-garden-900 text-emerald-300 border border-garden-700 px-2.5 py-1 rounded-full">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-          <span>Verified Session</span>
+          <span>Verified</span>
         </div>
       </header>
 
       {/* Navigation Tabs (Menu / Live Tracker / Bill) */}
-      <div className="bg-white border-b border-stone-200 px-4 py-2 flex items-center justify-between sticky top-[61px] z-20">
+      <div className="bg-white border-b border-garden-200 px-4 py-2 flex items-center justify-between sticky top-[64px] z-20">
         <div className="flex gap-2 w-full">
           <button
             onClick={() => setActiveTab("menu")}
-            className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition ${
-              activeTab === "menu" ? "bg-amber-800 text-white shadow-sm" : "text-stone-600 hover:bg-stone-100"
+            className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition ${
+              activeTab === "menu" ? "bg-garden-800 text-gold-300 shadow-sm" : "text-stone-600 hover:bg-garden-50"
             }`}
           >
             Menu & Order
           </button>
           <button
             onClick={() => setActiveTab("tracker")}
-            className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 ${
-              activeTab === "tracker" ? "bg-amber-800 text-white shadow-sm" : "text-stone-600 hover:bg-stone-100"
+            className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5 ${
+              activeTab === "tracker" ? "bg-garden-800 text-gold-300 shadow-sm" : "text-stone-600 hover:bg-garden-50"
             }`}
           >
             <Clock className="w-3.5 h-3.5" />
@@ -253,8 +254,8 @@ function GuestOrderContent() {
           {activeOrder && (
             <button
               onClick={() => setActiveTab("receipt")}
-              className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 ${
-                activeTab === "receipt" ? "bg-amber-800 text-white shadow-sm" : "text-stone-600 hover:bg-stone-100"
+              className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5 ${
+                activeTab === "receipt" ? "bg-garden-800 text-gold-300 shadow-sm" : "text-stone-600 hover:bg-garden-50"
               }`}
             >
               <Receipt className="w-3.5 h-3.5" />
@@ -270,15 +271,15 @@ function GuestOrderContent() {
       {activeTab === "menu" && (
         <div>
           {/* Category Horizontal Filter */}
-          <div className="flex gap-2 overflow-x-auto px-4 py-3 no-scrollbar bg-stone-50 sticky top-[106px] z-10 border-b border-stone-200">
+          <div className="flex gap-2 overflow-x-auto px-4 py-3 no-scrollbar bg-[#fcfaf2] sticky top-[109px] z-10 border-b border-garden-200">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
                   selectedCategory === cat
-                    ? "bg-stone-900 text-white shadow-sm"
-                    : "bg-white text-stone-700 border border-stone-200 hover:bg-stone-100"
+                    ? "bg-garden-800 text-gold-300 border border-gold-400 shadow-sm"
+                    : "bg-white text-garden-900 border border-garden-200 hover:bg-garden-50"
                 }`}
               >
                 {cat}
@@ -486,14 +487,15 @@ function GuestOrderContent() {
       {activeTab === "receipt" && activeOrder && (
         <div className="p-4 space-y-4">
           <div className="bg-white p-5 rounded-2xl border border-stone-200 shadow-lg text-center space-y-4">
-            <div className="w-12 h-12 bg-amber-100 text-amber-800 rounded-full flex items-center justify-center mx-auto">
-              <Receipt className="w-6 h-6" />
+            <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-gold-400 mx-auto bg-black shadow-md">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/logo.jpg" alt="Swade Allade Logo" className="w-full h-full object-cover" />
             </div>
 
             <div>
-              <div className="text-xs uppercase font-bold tracking-widest text-amber-700">Tax Invoice / Receipt</div>
-              <h2 className="text-lg font-bold text-stone-900">Aura Artisan Cafe</h2>
-              <p className="text-xs text-stone-500">Table #{tableNum} • GSTIN: 27AABCA1234F1Z5</p>
+              <div className="text-xs uppercase font-bold tracking-widest text-garden-700">Tax Invoice / Receipt</div>
+              <h2 className="text-lg font-bold text-garden-950">স্বাদে আহ্লাদে ক্যাফেটেরিয়া</h2>
+              <p className="text-xs text-stone-500">Swade Allade • Table #{tableNum} • www.swadeallade.com</p>
             </div>
 
             <div className="border-t border-b border-dashed border-stone-200 py-3 text-left space-y-2 text-xs">
@@ -566,23 +568,23 @@ function GuestOrderContent() {
       {/* ======================================================== */}
       {cart.length > 0 && activeTab === "menu" && (
         <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-4 z-40">
-          <div className="bg-stone-900 text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-between border border-stone-800">
+          <div className="bg-garden-950 text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-between border-2 border-gold-400/50">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center relative">
-                <ShoppingBag className="w-5 h-5 text-white" />
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-stone-900 border border-stone-700 rounded-full text-[10px] font-bold flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-garden-700 border border-gold-400/40 flex items-center justify-center relative">
+                <ShoppingBag className="w-5 h-5 text-gold-300" />
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-crimson-600 border border-gold-300 rounded-full text-[10px] font-bold flex items-center justify-center">
                   {cart.reduce((a, b) => a + b.quantity, 0)}
                 </span>
               </div>
               <div>
-                <div className="text-xs text-stone-400">Total (incl. GST)</div>
-                <div className="text-base font-extrabold text-amber-400">₹{cartTotal.toFixed(2)}</div>
+                <div className="text-xs text-emerald-200">Total (incl. GST)</div>
+                <div className="text-base font-extrabold text-gold-300">₹{cartTotal.toFixed(2)}</div>
               </div>
             </div>
 
             <button
               onClick={() => setIsCartOpen(true)}
-              className="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 shadow-md"
+              className="px-5 py-2.5 bg-gradient-to-r from-gold-400 to-amber-500 hover:from-gold-300 hover:to-amber-400 text-garden-950 rounded-xl text-xs font-extrabold transition flex items-center gap-1 shadow-md"
             >
               <span>View Cart</span>
               <ChevronRight className="w-4 h-4" />
